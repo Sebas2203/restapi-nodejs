@@ -1,0 +1,16 @@
+@api = http://localhost:3000/products
+
+
+GET {{api}}
+
+###
+
+POST {{api}} 
+# crear un dato hay que enviar un objecto json
+Content-Type: application/json
+
+{
+    "name": "GPU",
+    "description": "RX 500",
+    "quantity": 20
+}
