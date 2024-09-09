@@ -5,5 +5,5 @@ config();
 // console.log(process.env.PORT);
 
 export default {
-  port: process.env.PORT || 4000,
+  port: process.env.PORT || 3000,
 };

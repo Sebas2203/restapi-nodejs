@@ -36,12 +36,12 @@ export const creatNewPoduct = async (req, res) => {
       .input("name", sql.VarChar, name)
       .input("description", sql.Text, description)
       .input("quantity", sql.Int, quantity)
-      .query(
-        "INSERT INTO Products (name, description,quantity) VALUES (@name, @description, @quantity)"
-      );
+      .query(querys.addNewProduct);
     res.json({ name, description, quantity });
   } catch (error) {
     res.status(500);
     res.send(error.message);
   }
 };
+
+// 1:17:49
