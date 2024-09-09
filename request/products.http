@@ -3,7 +3,7 @@
 
 GET {{api}}
 
-###
+### Create a product 
 
 POST {{api}} 
 # crear un dato hay que enviar un objecto json
@@ -16,4 +16,21 @@ Content-Type: application/json
 }
 
 
-###
+### Getting a product by ID
+GET {{api}}/5
+
+### Deleting a product
+DELETE {{api}}/9
+
+### Get total products
+GET {{api}}/count
+
+### Update product
+PUT {{api}}/4
+Content-Type: application/json
+
+{
+    "name": "Mousepad",
+    "description": "Ryzer Mousepad",
+    "quantity": 100
+}

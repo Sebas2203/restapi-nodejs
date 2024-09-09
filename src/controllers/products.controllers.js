@@ -44,4 +44,66 @@ export const creatNewPoduct = async (req, res) => {
   }
 };
 
-// 1:17:49
+// optener producto por id
+
+export const getProductById = async (req, res) => {
+  const { id } = req.params;
+
+  //realizamos una consulta
+  const pool = await getConnection();
+  const result = await pool
+    .request()
+    .input("Id", id)
+    .query(querys.getProductById);
+  // console.log(result);
+
+  res.send(result.recordset[0]);
+};
+
+// borrar producto por id
+
+export const deleteProductById = async (req, res) => {
+  const { id } = req.params;
+
+  //realizamos una consulta
+  const pool = await getConnection();
+  const result = await pool
+    .request()
+    .input("Id", id)
+    .query(querys.deleteProduct);
+  // console.log(result);
+
+  // res.send(result);
+  res.sendStatus(204);
+};
+
+//contar cuantos productos hay
+export const getTotalProducts = async (req, res) => {
+  //realizamos una consulta
+  const pool = await getConnection();
+  const result = await pool.request().query(querys.getTotalProducts);
+  // console.log(result);
+
+  res.json(result.recordset[0][""]);
+};
+
+//modificar productos
+export const updateProductById = async (req, res) => {
+  const { name, description, quantity } = req.body;
+  const { id } = req.params;
+
+  if (name == null || description == null || quantity === null) {
+    return res.status(400).json({ msg: "Bad Request. Please Fill all fields" });
+  }
+
+  const pool = await getConnection();
+  await pool
+    .request()
+    .input("name", sql.VarChar, name)
+    .input("description", sql.Text, description)
+    .input("quantity", sql.Int, quantity)
+    .input("id", sql.Int, id)
+    .query(querys.updateProductById);
+
+  res.json({ name, description, quantity });
+};
